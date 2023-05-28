@@ -1,6 +1,8 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block title %}Inicio{% endblock title %}
-{% block main-content %}
+
+{% block carrusel %}
 <!-- Carrusel -->
 <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -12,42 +14,30 @@
 
   <div class="carousel-inner">
     <div class="carousel-item active c-item">
-      <img src="images/domenico-loia-EhTcC9sYXsw-unsplash.jpg" class="d-block w-100 c-img" alt="Slide 1" />
+      <img src="{% static 'core/images/carusel/imagen-carusel-1.jpg' %}" class="d-block w-100 c-img" alt="Slide 1" />
       <div class="carousel-caption top-0 mt-4">
         <p class="mt-5 fs-3 text-uppercase">
           Los mejores accesorios electronicos
         </p>
         <h1 class="display-1 fw-bolder text-capitalize">Al mejor precio</h1>
-        <!-- <a href="productos.html" class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-            data-bs-target="#booking-modal">
-            Productos
-          </a> -->
       </div>
     </div>
     <div class="carousel-item c-item">
-      <img src="images/arnel-hasanovic-4oWSXdeAS2g-unsplash.jpg" class="d-block w-100 c-img" alt="Slide 2" />
+      <img src="{% static 'core/images/carusel/imagen-carusel-2.jpg' %}" class="d-block w-100 c-img" alt="Slide 2" />
       <div class="carousel-caption top-0 mt-4">
         <p class="text-uppercase fs-3 mt-5">Ofertas todos los dias</p>
         <p class="display-1 fw-bolder text-capitalize">
           Productos con garantia
         </p>
-        <!-- <a href="productos.html" class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-            data-bs-target="#booking-modal">
-            Productos
-          </a> -->
       </div>
     </div>
     <div class="carousel-item c-item">
-      <img src="images/dagny-reese-mx4oQdFJ2rY-unsplash.jpg" class="d-block w-100 c-img" alt="Slide 3" />
+      <img src="{% static 'core/images/carusel/imagen-carusel-3.jpg' %}" class="d-block w-100 c-img" alt="Slide 3" />
       <div class="carousel-caption top-0 mt-4">
         <p class="text-uppercase fs-3 mt-5">Las mejores marcas</p>
         <p class="display-1 fw-bolder text-capitalize">
           Productos Con Descuento
         </p>
-        <!-- <a href="productos.html" class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-            data-bs-target="#booking-modal">
-            Productos
-          </a> -->
       </div>
     </div>
   </div>
@@ -60,7 +50,9 @@
     <span class="visually-hidden">Despues</span>
   </button>
 </div>
+{% endblock carrusel %}
 
+{% block main-content %}
 <!-- Card productos -->
 <div class="container">
   <div class="row">
