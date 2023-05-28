@@ -41,6 +41,9 @@
           </li>
         </ul>
         <div>
+          <!-- 
+            Si el usuario ha iniciado sesion le saldran estos botones, si el usuario no ha iniciado no le saldran
+          -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown mx-2">
@@ -58,6 +61,7 @@
               <a href="carrito_compras.html" class="nav-link text-white"><span class="badge bg-danger">4</span> Carrito
               </a>
             </li>
+            <!-- Si el usuario no ha iniciado sesion, le saldran estos botones y no los del perfil -->
             {% else %}
             <li class="nav-item mx-2">
               <a href="{% url 'login' %}" class="nav-link text-white">Iniciar sesion</a>
@@ -66,6 +70,10 @@
               <a href="{% url 'registrocliente' %}" class="nav-link text-white">Registrarse</a>
             </li>
             {% endif %}
+            <!-- 
+              Si el usuario ha iniciado sesion y es parte del staff le saldra este boton para acceder al panel del administrador 
+              si lo usuario no es staff no le saldra el boton
+            -->
             {% if user.is_authenticated and user.is_staff %}
             <li class="nav-item mx-2">
               <a href="#" class="btn btn-danger nav-link text-white">Admin Panel</a>
