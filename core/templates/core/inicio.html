@@ -64,18 +64,20 @@
 
 <main>
   <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Audifonos</h2>
     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for a in audifonos %}
       <div class="col">
         <div class="card h-100 shadow-sm">
-          <img src="images/productos/airpods.jfif" class="card-img-top" alt="..." />
+          <img src="{{a.imagen_producto.url}}" class="card-img-top" alt="..."/>
           <div class="card-body">
             <div class="clearfix mb-3">
-              <span class="float-start badge rounded-pill bg-primary">APPLE
+              <span class="float-start badge rounded-pill bg-primary">{{a.marca}}
               </span>
-              <span class="float-end price-hp">120.000&dollar;</span>
+              <span class="float-end price-hp">{{a.precio_venta}}&dollar;</span>
             </div>
             <h5 class="card-title">
-              Apple Airpods 3Ra Generación Con Estuche Magsafe.
+              {{a.titulo}}
             </h5>
             <div class="text-center my-4">
               <a href="detalle-producto.html" class="btn btn-warning">Ver Producto</a>
@@ -83,56 +85,85 @@
           </div>
         </div>
       </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Laptop</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for l in laptop %}
       <div class="col">
         <div class="card h-100 shadow-sm">
-          <img src="images/productos/mack.jpg" class="card-img-top" alt="..." />
+          <img src="{{l.imagen_producto.url}}" class="card-img-top" alt="..."/>
           <div class="card-body">
             <div class="clearfix mb-3">
-              <span class="float-start badge rounded-pill bg-primary">APPLE
+              <span class="float-start badge rounded-pill bg-primary">{{l.marca}}
               </span>
-              <span class="float-end price-hp">48.990&dollar;</span>
-            </div>
-            <h5 class="card-title">Laptop Apple Macbook Pro 13 Chip M2 256gb.</h5>
-            <div class="text-center my-4">
-              <a href="#" class="btn btn-warning">Ver Producto</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <img src="images/productos/mouse-logitech-g502-hero.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <div class="clearfix mb-3">
-              <span class="float-start badge rounded-pill bg-primary">LOGITECH
-              </span>
-              <span class="float-end price-hp">1.200.000&dollar;</span>
+              <span class="float-end price-hp">{{l.precio_venta}}&dollar;</span>
             </div>
             <h5 class="card-title">
-              Mouse Gamer Logitech G502 Hero Lightspeed Inalambrico.
+              {{l.titulo}}
             </h5>
             <div class="text-center my-4">
-              <a href="#" class="btn btn-warning">Ver Producto</a>
+              <a href="detalle-producto.html" class="btn btn-warning">Ver Producto</a>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Telefonos</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for m in mobiles %}
       <div class="col">
         <div class="card h-100 shadow-sm">
-          <img src="images/productos/keyy.jfif" class="card-img-top" alt="..." />
+          <img src="{{m.imagen_producto.url}}" class="card-img-top" alt="..."/>
           <div class="card-body">
             <div class="clearfix mb-3">
-              <span class="float-start badge rounded-pill bg-primary">LOGITECH
+              <span class="float-start badge rounded-pill bg-primary">{{m.marca}}
               </span>
-              <span class="float-end price-hp">49.990&dollar;</span>
+              <span class="float-end price-hp">{{m.precio_venta}}&dollar;</span>
             </div>
-            <h5 class="card-title">Teclado Logitech Gamer G213 Prodigy Español RGBA.</h5>
+            <h5 class="card-title">
+              {{m.titulo}}
+            </h5>
             <div class="text-center my-4">
-              <a href="#" class="btn btn-warning">Ver Producto</a>
+              <a href="detalle-producto.html" class="btn btn-warning">Ver Producto</a>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+    <h2 style="color: #333; font-size: 24px; margin-bottom: 10px;">Teclados</h2>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+      {% for t in teclados %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{t.imagen_producto.url}}" class="card-img-top" alt="..."/>
+          <div class="card-body">
+            <div class="clearfix mb-3">
+              <span class="float-start badge rounded-pill bg-primary">{{t.marca}}
+              </span>
+              <span class="float-end price-hp">{{t.precio_venta}}</span>
+            </div>
+            <h5 class="card-title">
+              {{t.titulo}}
+            </h5>
+            <div class="text-center my-4">
+              <a href="detalle-producto.html" class="btn btn-warning">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </main>

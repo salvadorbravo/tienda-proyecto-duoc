@@ -26,8 +26,16 @@ from django.http import JsonResponse
 #     return redirect('login')  
 
 # Vista del home
-def inicio(request):
-    return render(request, 'core/inicio.html')
+# def inicio(request):
+#     return render(request, 'core/inicio.html')
+
+class VistaProducto(View):
+    def get(self, request):
+        audifonos = Producto.objects.filter(categoria='A')
+        laptop = Producto.objects.filter(categoria='L')
+        mobiles = Producto.objects.filter(categoria='M')
+        teclados = Producto.objects.filter(categoria='T')
+        return render(request, 'core/inicio.html', {'audifonos':audifonos, 'laptop':laptop, 'mobiles':mobiles, 'teclados':teclados})
 
 # Vista del Registro de Usuario
 class VistaRegistroCliente(View):
@@ -63,3 +71,6 @@ class VistaPerfil(View):
             messages.success(request, 'Perfil Actualizado')
         return render(request, 'core/perfil.html', {'form':form,
         'active':'btn-primary'})
+        
+def detalle_producto(request):
+    return render(request, 'core/detalle-producto.html')

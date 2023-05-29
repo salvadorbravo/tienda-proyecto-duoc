@@ -7,9 +7,9 @@ from .forms import FormularioLoginUsuario
 
 # Validacion de usuario en login 
 urlpatterns = [
-    # path('login/', views.login_view, name='login'),
-    # path('logout/', views.logout_view, name='logout'),
-    path('', views.inicio),
+    # path('', views.inicio),
+    path('', views.VistaProducto.as_view(), name='inicio'),
+    path('detalle-producto/', views.detalle_producto, name='detalle-producto'),
     path('perfil/', views.VistaPerfil.as_view(), name='perfil'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='core/test-login.html', authentication_form=FormularioLoginUsuario), name='login'),
     path('registro/', views.VistaRegistroCliente.as_view(), name="registrocliente"),
