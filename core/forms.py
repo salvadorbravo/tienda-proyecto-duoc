@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
 from .models import Cliente
+from django import forms
+from .models import FormContacto
 
 # Formulario de Registro del Cliente
 class FormularioRegistroUsuario(UserCreationForm):
@@ -32,3 +34,14 @@ class FormularioPerfilCliente(forms.ModelForm):
         {'class':'form-control'}),
         'region':forms.Select(attrs={'class':'form-control'}),
         'codigo_postal':forms.NumberInput(attrs={'class':'form-control'})}
+
+# Formulario de Contacto
+class FormularioContacto (forms.ModelForm):
+    class Meta:
+        model = FormContacto
+        fields = ['primer_nombre','apellidos','comentarios','correo_electronico','ciudad']
+        
+        def limpiar_correo(self):
+            correo_electronico = self.cleaned_data ['correo_electronico']
+            # Agregar regla de validación personalizada aca
+            return correo_electronico

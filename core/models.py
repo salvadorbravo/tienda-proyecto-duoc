@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
 
@@ -89,3 +90,15 @@ class PedidoRealizado(models.Model):
     
     class Meta:
         verbose_name_plural = 'Pedido Realizado'
+
+
+
+# Modelo de Formulario de contacto
+
+class FormularioContacto (models.Model):
+    primer_nombre = models.CharField(max_length=50)
+    apellidos = models.CharField(max_length=50)
+    comentarios = models.TextField()
+    correo_electronico = models.EmailField()
+    ciudad = models.CharField(max_length= 100)
+
