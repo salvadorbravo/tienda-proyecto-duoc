@@ -95,7 +95,7 @@ class PedidoRealizado(models.Model):
 
 # Modelo de Formulario de contacto
 
-class FormularioContacto (models.Model):
+class FormularioContacto(models.Model):
     primer_nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=50)
     comentarios = models.TextField()

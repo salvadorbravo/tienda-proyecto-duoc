@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
 from .models import Cliente
 from django import forms
-from .models import FormContacto
+from .models import FormularioContacto
 
 # Formulario de Registro del Cliente
 class FormularioRegistroUsuario(UserCreationForm):
@@ -38,7 +38,7 @@ class FormularioPerfilCliente(forms.ModelForm):
 # Formulario de Contacto
 class FormularioContacto (forms.ModelForm):
     class Meta:
-        model = FormContacto
+        model = FormularioContacto
         fields = ['primer_nombre','apellidos','comentarios','correo_electronico','ciudad']
         
         def limpiar_correo(self):
