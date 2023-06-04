@@ -14,4 +14,17 @@ urlpatterns = [
     path('registro/', views.VistaRegistroCliente.as_view(), name="registrocliente"),
     path('cerrar-sesion/', auth_views.LogoutView.as_view(next_page='login'), name='cerrar-sesion'), # Cierra la sesion y redirige a la pagina de login
     path('contacto/', views.contacto, name='contacto'),
+    # Pagina de los Telefonos
+    path('telefono/', views.telefono, name='telefono'),
+    path('telefono/<slug:data>', views.telefono, name='telefono'),
+    # Pagina de los Audifonos
+    path('audifono/', views.audifono, name='audifono'),
+    path('audifono/<slug:data>', views.audifono, name='audifono'),
+    # Pagina de los Computadores
+    path('laptop/', views.laptop, name='laptop'),
+    path('laptop/<slug:data>', views.laptop, name='laptop'),
+    # Pagina de los Teclados
+    path('teclado/', views.teclado, name='teclado'),
+    path('teclado/<slug:data>', views.teclado, name='teclado'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

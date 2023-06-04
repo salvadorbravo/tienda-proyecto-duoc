@@ -32,7 +32,6 @@ class VistaDetalleProducto(View):
         return render(request, 'core/detalle-producto.html', {'producto':producto})
 
 
-
 # Vista del Registro de Usuario
 class VistaRegistroCliente(View):
     def get(self, request):
@@ -70,3 +69,29 @@ class VistaPerfil(View):
         
 def detalle_producto(request):
     return render(request, 'core/detalle-producto.html')
+
+
+# Vista de los Audifonos
+def audifono(request, data=None):
+    if data == None:
+        audifonos = Producto.objects.filter(categoria='A')
+    return render(request, 'core/audifonos.html', {'audifonos':audifonos})
+
+# Vista de los Laptop
+def laptop(request, data=None):
+    if data == None:
+        laptops = Producto.objects.filter(categoria='L')
+    return render(request, 'core/laptops.html', {'laptops':laptops})
+
+# Vista del Telefono
+def telefono(request, data=None):
+    if data == None:
+        telefonos = Producto.objects.filter(categoria='M')
+    return render(request, 'core/telefono.html', {'telefonos':telefonos})
+
+# Vista de los Teclados
+def teclado(request, data=None):
+    if data == None:
+        teclados = Producto.objects.filter(categoria='T')
+    return render(request, 'core/teclados.html', {'teclados':teclados})
+
