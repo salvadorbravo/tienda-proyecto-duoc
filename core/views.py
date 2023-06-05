@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Cliente, Producto, Carrito, PedidoRealizado
-from .forms import FormularioRegistroUsuario, FormularioPerfilCliente
+from .forms import FormularioRegistroUsuario, FormularioPerfilCliente, FormularioContacto
 from django.contrib import messages
 from django.http import JsonResponse
 
@@ -95,3 +95,14 @@ def teclado(request, data=None):
         teclados = Producto.objects.filter(categoria='T')
     return render(request, 'core/teclados.html', {'teclados':teclados})
 
+# Vista de Formulario de Contacto
+def contacto_vista (request):
+    if request.method == 'POST':
+        form = FormularioContacto(request.POST)
+        if form.is_valid():
+            messages.success(request, '¡Se ha enviado con exito!, nos comunicaremos con usted lo antes posible.')
+            form.save()
+            return render(request, 'contacto.html')
+    else:
+        form = FormularioContacto()
+    return render(request, 'core/contacto.html', {'form': form})
