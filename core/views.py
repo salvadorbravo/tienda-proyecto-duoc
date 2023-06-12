@@ -5,15 +5,8 @@ from .forms import FormularioRegistroUsuario, FormularioPerfilCliente, Formulari
 from django.contrib import messages
 from django.http import JsonResponse
 
-# Vista del home
-# def inicio(request):
-#     return render(request, 'core/inicio.html')
 
-# Vista del Contacto
-def contacto(request):
-    return render(request, 'core/contacto.html')
-
-# Vista de la lista de Productos
+# Vista de la lista de Productos (PRINCIPAL)
 class VistaProducto(View):
     def get(self, request):
         audifonos = Producto.objects.filter(categoria='A')
@@ -23,14 +16,10 @@ class VistaProducto(View):
         return render(request, 'core/inicio.html', {'audifonos':audifonos, 'laptop':laptop, 'mobiles':mobiles, 'teclados':teclados})
     
 # Vista del Detalle del Producto
-# def detalle_producto(request):
-#     return render(request, 'core/detalle-producto.html')
-
 class VistaDetalleProducto(View):
     def get(self, request, pk):
         producto = Producto.objects.get(pk=pk)
         return render(request, 'core/detalle-producto.html', {'producto':producto})
-
 
 # Vista del Registro de Usuario
 class VistaRegistroCliente(View):
@@ -63,14 +52,11 @@ class VistaPerfil(View):
             codigo_postal = form.cleaned_data['codigo_postal']
             reg = Cliente(user=usr, nombre=nombre, localidad=localidad, ciudad=ciudad, region=region, codigo_postal=codigo_postal)
             reg.save()
-            messages.success(request, 'Perfil Actualizado')
+            messages.success(request, 'DIRECCION REGISTRADA CORRECTAMENTE')
+            form = FormularioPerfilCliente()  # Limpiar los campos del formulario
         return render(request, 'core/perfil.html', {'form':form,
         'active':'btn-primary'})
         
-def detalle_producto(request):
-    return render(request, 'core/detalle-producto.html')
-
-
 # Vista de los Audifonos
 def audifono(request, data=None):
     if data == None:
@@ -106,3 +92,12 @@ def contacto_vista (request):
     else:
         form = FormularioContacto()
     return render(request, 'core/contacto.html', {'form': form})
+
+# Vista del Contacto
+def contacto(request):
+    return render(request, 'core/contacto.html')
+
+# Vista de las Direcciones
+def direcciones(request):
+    agregar = Cliente.objects.filter(user=request.user)
+    return render(request, 'core/direcciones.html', {'agregar':agregar, 'active':'btn-primary'})

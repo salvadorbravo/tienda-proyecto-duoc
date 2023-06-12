@@ -26,5 +26,6 @@ urlpatterns = [
     # Pagina de los Teclados
     path('teclado/', views.teclado, name='teclado'),
     path('teclado/<slug:data>', views.teclado, name='teclado'),
+    path('direcciones/', views.direcciones, name='direcciones'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
