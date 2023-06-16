@@ -16,7 +16,7 @@
         {% csrf_token %}
         {% for fm in form %}
         <div class="form-group col-lg-6 mb-3">
-          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> <!-- renderiza la etiqueta del campo del formulario -->
         </div>
         {% endfor %}
         <div class="col-12 mt-3">
