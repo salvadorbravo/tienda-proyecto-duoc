@@ -20,6 +20,33 @@ class VistaDetalleProducto(View):
     def get(self, request, pk):
         producto = Producto.objects.get(pk=pk)
         return render(request, 'core/detalle-producto.html', {'producto':producto})
+    
+# Vista del Carrito de Compras
+def añadir_carrito(request):
+    user = request.user
+    producto_id = request.GET.get('prod_id')
+    producto = Producto.objects.get(id=producto_id)
+    Carrito(user=user, producto=producto).save()
+    return redirect('/carrito')
+
+# Vista para Mostrar el Carrito de Compras
+def mostrar_carrito(request):
+    if request.user.is_authenticated:
+        user = request.user
+        carrito = Carrito.objects.filter(user=user)
+        # Calculo matematico para lograr sumar la cantidad de productos en el carrito y sumando el costo de envio.
+        pago = 0
+        envio = 2000
+        total_pago = 0
+        productos_carrito = [p for p in Carrito.objects.all() if p.user == user]
+        if productos_carrito:
+            for p in productos_carrito:
+               total_temporal = (p.cantidad * p.producto.precio_venta) 
+               pago += total_temporal
+               total_pago = pago + envio
+            return render(request, 'core/añadir-carrito.html', {'carritos':carrito, 'total_pago':total_pago, 'pago':pago, 'envio':envio})
+        else:
+            return render(request, 'core/carrito-vacio.html')
 
 # Vista del Registro de Usuario
 class VistaRegistroCliente(View):
@@ -101,3 +128,4 @@ def contacto(request):
 def direcciones(request):
     agregar = Cliente.objects.filter(user=request.user)
     return render(request, 'core/direcciones.html', {'agregar':agregar, 'active':'btn-primary'})
+

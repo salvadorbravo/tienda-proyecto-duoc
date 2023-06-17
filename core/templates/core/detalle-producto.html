@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block title %}Detalle Producto{% endblock title %}
+{% load humanize %}
 {% block main-content %}
 <style>
   .text-bold {
@@ -112,11 +113,15 @@
           {{producto.titulo}}
         </div>
         <div class="price-area my-4">
-          <p class="new-price text-bold mb-1">${{producto.precio_venta}}</p>
+          <p class="new-price text-bold mb-1">${{producto.precio_venta|intcomma}}</p>
         </div>
+
         <div class="buttons d-flex my-5">
           <div class="block">
-            <a href="#" class="shadow btn btn-success ">Añadir</a>
+            <form action="/añadir-carrito" class="d-inline">
+              <input type="hidden" name="prod_id" value={{producto.id}} id="prod_id">
+              <button type="submit" class="btn btn-success shadow px-5 py-2">Añadir</button>
+            </form>
           </div>
           <div class="block">
             <button class="shadow btn btn-primary">Comprar</button>

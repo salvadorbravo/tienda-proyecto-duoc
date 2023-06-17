@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}Inicio{% endblock title %}
 
 {% block carrusel %}
@@ -74,7 +75,7 @@
             <div class="clearfix mb-3">
               <span class="float-start badge rounded-pill bg-primary">{{a.marca}}
               </span>
-              <span class="float-end price-hp">{{a.precio_venta}}&dollar;</span>
+              <span class="float-end price-hp">{{a.precio_venta|intcomma}}&dollar;</span>
             </div>
             <h5 class="card-title">
               {{a.titulo}}
@@ -100,7 +101,7 @@
             <div class="clearfix mb-3">
               <span class="float-start badge rounded-pill bg-primary">{{l.marca}}
               </span>
-              <span class="float-end price-hp">{{l.precio_venta}}&dollar;</span>
+              <span class="float-end price-hp">{{l.precio_venta|intcomma}}&dollar;</span>
             </div>
             <h5 class="card-title">
               {{l.titulo}}
@@ -126,7 +127,7 @@
             <div class="clearfix mb-3">
               <span class="float-start badge rounded-pill bg-primary">{{m.marca}}
               </span>
-              <span class="float-end price-hp">{{m.precio_venta}}&dollar;</span>
+              <span class="float-end price-hp">{{m.precio_venta|intcomma}}&dollar;</span>
             </div>
             <h5 class="card-title">
               {{m.titulo}}
@@ -152,7 +153,7 @@
             <div class="clearfix mb-3">
               <span class="float-start badge rounded-pill bg-primary">{{t.marca}}
               </span>
-              <span class="float-end price-hp">{{t.precio_venta}}</span>
+              <span class="float-end price-hp">{{t.precio_venta|intcomma}}</span>
             </div>
             <h5 class="card-title">
               {{t.titulo}}
