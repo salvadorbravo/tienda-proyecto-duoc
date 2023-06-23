@@ -18,6 +18,12 @@ class FormularioRegistroUsuario(UserCreationForm):
         labels = {'email': 'email'}
         widgets = {'username': forms.TextInput(attrs={'class':'form-control'})}
         
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('Este nombre de usuario ya esta registrado. Intenta con otro')
+        return username
+        
 # Formulario de Iniciar Sesion del Cliente
 class FormularioLoginUsuario(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True, 'class':'form-control'}))
