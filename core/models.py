@@ -72,9 +72,14 @@ class Carrito(models.Model):
     def __str__(self):
         return str(self.id)
     
+    @property
+    def costo_total(self):
+        return self.cantidad * self.producto.precio_venta
+    
 # Modelo del Pedido Realizado
 ESTADO_CHOICES = (
     ('Aceptado', 'Aceptado'),
+    ('Empacado', 'Empacado'),
     ('En camino', 'En camino'),
     ('Entregado', 'Entregado'),
     ('Cancelado', 'Cancelado')
@@ -90,8 +95,13 @@ class PedidoRealizado(models.Model):
     
     class Meta:
         verbose_name_plural = 'Pedido Realizado'
-
-
+        
+    def __str__(self):
+        return str(self.id)
+    
+    @property
+    def costo_total(self):
+        return self.cantidad * self.producto.precio_venta
 
 # Modelo de Formulario de contacto
 

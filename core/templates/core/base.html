@@ -17,6 +17,8 @@
   </script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/ed3a6e1af0.js" crossorigin="anonymous"></script>
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   <title>Techno-Shop | {% block title %} {% endblock title %}</title>
 </head>
@@ -63,7 +65,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="{% url 'perfil' %}">Direccion</a></li>
-                <li><a class="dropdown-item" href="ordenes.html">Pedidos</a></li>
+                <li><a class="dropdown-item" href="{% url 'ordenes' %}">Pedidos</a></li>
                 <li><a class="dropdown-item" href="{% url 'cerrar-sesion' %}">Cerrar sesion</a></li>
               </ul>
             </li>

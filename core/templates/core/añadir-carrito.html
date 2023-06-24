@@ -64,24 +64,18 @@
                       <h6 class="text-black mb-0">{{carrito.producto.titulo}}</h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
-
-                      <input id="form1" min="0" name="quantity" value={{carrito.cantidad}} type="number"
-                        class="form-control form-control-sm" />
-
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
+                      <label for="cantidad">Cantidad:</label>
+                      <a class="minus-cart btn" pid="{{carrito.producto.id}}"><i
+                          class="fas fa-minus-square fa-lg"></i></a>
+                      <span id="cantidad">{{carrito.cantidad}}</span>
+                      <a class="plus-cart btn" pid="{{carrito.producto.id}}"><i
+                          class="fas fa-plus-square fa-lg"></i></a>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0">${{carrito.producto.precio_venta|intcomma}}</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                      <a href="#" class="remove-cart text-muted" pid="{{carrito.producto.id}}"><i class="fas fa-times"></i></a>
                     </div>
                   </div>
                   {% endfor %}
@@ -100,7 +94,7 @@
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">Productos: {{carritos|length}}</h5>
-                    <h5>${{pago|intcomma}}</h5>
+                    <h5 id="pago">${{pago|intcomma}}</h5>
                   </div>
 
                   <h5 class="text-uppercase mb-3">Envio: {{envio|intcomma}}</h5>
@@ -109,12 +103,10 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Total a Pagar</h5>
-                    <h5>${{total_pago|intcomma}}</h5>
+                    <h5 id="total_pago">${{total_pago|intcomma}}</h5>
                   </div>
 
-                  <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Register</button>
-
+                  <a href="{% url 'verificar' %}" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Realizar Pedido</a>
                 </div>
               </div>
             </div>
@@ -124,4 +116,63 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Aumentar cantidad de productos carrito.
+  $('.plus-cart').click(function () {
+    var id = $(this).attr("pid").toString();
+    var em1 = this.parentNode.children[2]
+    // console.log(id);
+    $.ajax({
+      type: "GET",
+      url: "/aumentarcarrito",
+      data: {
+        prod_id: id
+      },
+      success: function (data) {
+        em1.innerText = data.cantidad
+        document.getElementById("pago").innerText = "$" +  data.pago.toLocaleString();
+        document.getElementById("total_pago").innerText = "$" +  data.total_pago.toLocaleString();
+      }
+    })
+  });
+
+  // Reducir cantidad de productos carrito.
+  $('.minus-cart').click(function () {
+    var id = $(this).attr("pid").toString();
+    var em1 = this.parentNode.children[2]
+    // console.log(id);
+    $.ajax({
+      type: "GET",
+      url: "/reducircarrito",
+      data: {
+        prod_id: id
+      },
+      success: function (data) {
+        em1.innerText = data.cantidad
+        document.getElementById("pago").innerText = "$" +  data.pago.toLocaleString();
+        document.getElementById("total_pago").innerText = "$" +  data.total_pago.toLocaleString();
+      }
+    })
+  });
+
+  // Remover la cantidad de productos carrito.
+  $('.remove-cart').click(function () {
+    var id = $(this).attr("pid").toString();
+    var em1 = this.parentNode.children[2]
+    console.log(id);
+    $.ajax({
+      type: "GET",
+      url: "/removercarrito",
+      data: {
+        prod_id: id
+      },
+      success: function (data) {
+        console.log("Eliminado");
+        document.getElementById("pago").innerText = "$" +  data.pago.toLocaleString();
+        document.getElementById("total_pago").innerText = "$" +  data.total_pago.toLocaleString();
+      }
+    })
+  });
+</script>
 {% endblock main-content %}

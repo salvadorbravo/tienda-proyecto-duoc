@@ -11,11 +11,18 @@ urlpatterns = [
     # Pagina del Carrito de Compras
     path('añadir-carrito/', views.añadir_carrito, name="añadir-carrito"),
     path('carrito/', views.mostrar_carrito, name="mostrar-carrito"),
+    path('aumentarcarrito/', views.aumentar_carrito),
+    path('reducircarrito/', views.reducir_carrito),
+    path('removercarrito/', views.remover_carrito),
+    #
+    path('checkout/', views.verificar, name="verificar"),
+    path('pagorealizado/', views.pago_realizado, name="pagorealizado"),
+    path('ordenes/', views.ordenes, name='ordenes'),
     # 
     path('detalle-producto/<int:pk>', views.VistaDetalleProducto.as_view(), name='detalle-producto'),
     # 
     path('perfil/', views.VistaPerfil.as_view(), name='perfil'),
-    # 
+    #
     path('accounts/login/', auth_views.LoginView.as_view(template_name='core/test-login.html', authentication_form=FormularioLoginUsuario), name='login'),
     path('registro/', views.VistaRegistroCliente.as_view(), name="registrocliente"),
     path('cerrar-sesion/', auth_views.LogoutView.as_view(next_page='login'), name='cerrar-sesion'), # Cierra la sesion y redirige a la pagina de login
