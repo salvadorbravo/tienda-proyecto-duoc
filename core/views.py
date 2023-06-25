@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Cliente, Producto, Carrito, PedidoRealizado
-from .forms import FormularioRegistroUsuario, FormularioPerfilCliente, FormularioContacto
+from .forms import FormularioRegistroUsuario, FormularioPerfilCliente, FormularioContacto, ProductoForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Vista de la lista de Productos (PRINCIPAL)
 class VistaProducto(View):
@@ -234,3 +235,61 @@ def direcciones(request):
     agregar = Cliente.objects.filter(user=request.user)
     return render(request, 'core/direcciones.html', {'agregar':agregar, 'active':'btn-primary'})
 
+
+# Vista para agregar producto para el admin
+@staff_member_required
+def agregar_producto(request):
+    
+    data = {
+        'form': ProductoForm()
+    }
+    
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Guardado Correctamente"
+        else:
+            data["form"] = formulario
+    
+    return render(request, 'core/admin/agregar.html', data)
+
+# Vista para listar productos para el admin
+@staff_member_required
+def listar_productos(request):
+    productos = Producto.objects.all()
+    
+    data = {
+        'productos': productos
+    }
+    return render(request, 'core/admin/listar.html', data)
+
+# Vistar para editar productos para el admin
+@staff_member_required
+def modificar_producto(request, id):
+    
+    producto = get_object_or_404(Producto, id=id)
+    
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+    
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to='listar_productos')
+        data["form"] = formulario
+        
+    return render(request, 'core/admin/modificar.html', data)
+
+# Vista para eliminar productos para el admin
+@staff_member_required
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to="listar_productos")
+
+# Vista de la pagina de de la api rest
+def clima_api_rest(request):
+    return render(request, 'core/clima-api-rest.html')

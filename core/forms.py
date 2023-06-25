@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
-from .models import Cliente
+from .models import Cliente, Producto
 from django import forms
 from .models import FormularioContacto
 
@@ -51,3 +51,9 @@ class FormularioContacto (forms.ModelForm):
             correo_electronico = self.cleaned_data ['correo_electronico']
             # Agregar regla de validación personalizada aca
             return correo_electronico
+        
+class ProductoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Producto
+        fields = '__all__'
