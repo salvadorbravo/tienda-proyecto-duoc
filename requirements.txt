@@ -1,0 +1,2 @@
+Pillow==9.2.0
+crispy-bootstrap5==0.7
