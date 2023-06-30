@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.views import View
 from .models import Cliente, Producto, Carrito, PedidoRealizado
 from .forms import FormularioRegistroUsuario, FormularioPerfilCliente, FormularioContacto, ProductoForm
@@ -163,6 +164,7 @@ class VistaRegistroCliente(View):
         if formulario.is_valid():
             messages.success(request, 'Registrado Correctamente')
             formulario.save()
+            return redirect(reverse('login'))
         return render(request, 'core/test-registro.html', {'formulario':formulario})
     
 # Vista del Perfil
