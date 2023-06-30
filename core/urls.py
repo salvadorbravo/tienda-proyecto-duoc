@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from .forms import FormularioLoginUsuario
-from .views import agregar_producto, listar_productos, modificar_producto, eliminar_producto
+from .views import agregar_producto, listar_productos, modificar_producto, eliminar_producto, listar_pedidos
 
 # Validacion de usuario en login 
 urlpatterns = [
@@ -47,6 +47,8 @@ urlpatterns = [
     path('listar-productos/', listar_productos, name="listar_productos"),
     path('modificar-producto/<id>/', modificar_producto, name="modificar_producto"),
     path('eliminar-producto/<id>/', eliminar_producto, name="eliminar_producto"),
+    path('listar-pedidos/', listar_pedidos, name="listar_pedidos"),
+    path('eliminar_pedido/<int:pedido_id>/', views.eliminar_pedido, name='eliminar_pedido'),
     # 
     path('clima-api-rest/', views.clima_api_rest, name="clima_api_rest"),
     

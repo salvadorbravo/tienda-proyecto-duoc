@@ -70,7 +70,8 @@
               </ul>
             </li>
             <li class="nav-item mx-2">
-              <a href="{% url 'mostrar-carrito' %}" class="nav-link text-white"><span class="badge bg-danger"></span><i class="fa-solid fa-cart-shopping"></i>
+              <a href="{% url 'mostrar-carrito' %}" class="nav-link text-white"><span class="badge bg-danger"></span><i
+                  class="fa-solid fa-cart-shopping"></i>
               </a>
             </li>
             <!-- Si el usuario no ha iniciado sesion, le saldran estos botones y no los del perfil -->
@@ -93,6 +94,9 @@
             <li>
               <a href="{% url 'listar_productos' %}" class="btn btn-danger">Listar Productos</a>
             </li>
+            <li>
+              <a href="{% url 'listar_pedidos' %}" class="btn btn-danger">Listar Pedidos</a>
+            </li>
             {% endif %}
           </ul>
         </div>
@@ -102,7 +106,7 @@
 
   {% block carrusel %} {% endblock carrusel %}
   {% block main-content %} {% endblock main-content %}
-  
+
 </body>
 
 </html>

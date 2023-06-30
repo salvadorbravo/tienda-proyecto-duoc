@@ -292,6 +292,19 @@ def eliminar_producto(request, id):
     producto.delete()
     return redirect(to="listar_productos")
 
+# Vista para poder listar los pedidos que se han realizado en la pagina
+@staff_member_required
+def listar_pedidos(request):
+    pedidos = PedidoRealizado.objects.all()
+    return render(request, 'core/admin/listar-pedidos.html', {'pedidos':pedidos})
+
+# Vista para poder eliminar un pedido realizado
+def eliminar_pedido(request, pedido_id):
+    pedido = get_object_or_404(PedidoRealizado, id=pedido_id)
+    pedido.delete()
+    return redirect('listar_pedidos')
+
+
 # Vista de la pagina de de la api rest
 def clima_api_rest(request):
     return render(request, 'core/clima-api-rest.html')
