@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 
@@ -48,7 +49,7 @@ CATEGORIA_CHOISES = (
 
 class Producto(models.Model):
     titulo = models.CharField(max_length=100)
-    precio_venta = models.FloatField()
+    precio_venta = models.FloatField(validators=[MinValueValidator(1.0)])
     descripcion = models.TextField()
     marca = models.CharField(max_length=100)
     categoria = models.CharField(choices=CATEGORIA_CHOISES, max_length=50)
