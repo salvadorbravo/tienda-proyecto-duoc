@@ -112,7 +112,6 @@ class PedidoRealizado(models.Model):
         super().save(*args, **kwargs)
     
     
-
 # Modelo de Formulario de contacto
 
 class FormularioContacto(models.Model):
