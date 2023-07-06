@@ -150,8 +150,9 @@ def pago_realizado(request):
 # Funcion de las ordenes
 @login_required
 def ordenes(request):
-    pd = PedidoRealizado.objects.filter(user=request.user)
-    return render(request, 'core/ordenes.html', {'pedido_realizado':pd})
+    pedidos = PedidoRealizado.objects.select_related('producto').filter(user=request.user)
+    # pd = PedidoRealizado.objects.filter(user=request.user)
+    return render(request, 'core/ordenes.html', {'pedidos':pedidos})
         
 # Vista del Registro de Usuario
 class VistaRegistroCliente(View):
