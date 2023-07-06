@@ -92,7 +92,7 @@ class PedidoRealizado(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
-    estado = models.CharField(choices=ESTADO_CHOICES, max_length=100, default='Pendiente')
+    estado = models.CharField(choices=ESTADO_CHOICES, max_length=100, default='Aceptado')
     
     class Meta:
         verbose_name_plural = 'Pedido Realizado'
