@@ -93,6 +93,7 @@ class PedidoRealizado(models.Model):
     cantidad = models.PositiveIntegerField(default=1)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(choices=ESTADO_CHOICES, max_length=100, default='Aceptado')
+    precio_producto = models.FloatField(default=0)
     
     class Meta:
         verbose_name_plural = 'Pedido Realizado'
@@ -102,7 +103,15 @@ class PedidoRealizado(models.Model):
     
     @property
     def costo_total(self):
-        return self.cantidad * self.producto.precio_venta
+        return self.cantidad * self.precio_producto
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            # Nuevo pedido, guardar el precio del producto actual
+            self.precio_producto = self.producto.precio_venta
+        super().save(*args, **kwargs)
+    
+    
 
 # Modelo de Formulario de contacto
 
