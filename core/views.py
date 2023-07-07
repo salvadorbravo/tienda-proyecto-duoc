@@ -163,8 +163,8 @@ class VistaRegistroCliente(View):
     def post(self, request):
         formulario = FormularioRegistroUsuario(request.POST)
         if formulario.is_valid():
-            messages.success(request, 'Registrado Correctamente')
             formulario.save()
+            messages.success(request, 'Registrado Correctamente, Recuerda Registrar Tu Direccion En Tu Perfil')
             return redirect(reverse('login'))
         return render(request, 'core/test-registro.html', {'formulario':formulario})
     
@@ -187,7 +187,7 @@ class VistaPerfil(View):
             codigo_postal = form.cleaned_data['codigo_postal']
             reg = Cliente(user=usr, nombre=nombre, localidad=localidad, ciudad=ciudad, region=region, codigo_postal=codigo_postal)
             reg.save()
-            messages.success(request, 'DIRECCION REGISTRADA CORRECTAMENTE')
+            messages.success(request, 'Direccion Registrada Correctamente')
             form = FormularioPerfilCliente()  # Limpiar los campos del formulario
         return render(request, 'core/perfil.html', {'form':form,
         'active':'btn-primary'})
@@ -281,6 +281,7 @@ def modificar_producto(request, id):
         formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Modificado Correctamente")
             return redirect(to='listar_productos')
         data["form"] = formulario
         
@@ -291,6 +292,7 @@ def modificar_producto(request, id):
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
+    messages.success(request, "Eliminado Correctamente")
     return redirect(to="listar_productos")
 
 # Vista para poder listar los pedidos que se han realizado en la pagina

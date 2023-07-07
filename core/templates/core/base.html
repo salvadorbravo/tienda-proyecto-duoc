@@ -104,6 +104,22 @@
     </div>
   </nav>
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  {% if messages %}
+    {% for m in messages %}
+      <script>
+        Swal.fire({
+          "title": "Felicitaciones",
+          "text": "{{m}}",
+          "icon": "success"
+        })
+      </script>
+    {% endfor %}
+  {% endif %}
+
+
   {% block carrusel %} {% endblock carrusel %}
   {% block main-content %} {% endblock main-content %}
 
